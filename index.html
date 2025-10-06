@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Portofolio — Naufal Akbar Nasution</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --mint:#DFF2EB; --pale:#B9E5E8; --sky:#7AB2D3;
+  --ink:#1f2a44; --muted:#6d7a90; --line:rgba(31,42,68,.12);
+  --card:rgba(255,255,255,.66); --shadow:0 10px 24px rgba(31,42,68,.10), 0 1px 0 rgba(31,42,68,.04);
+  --radius-xl:20px; --radius-lg:14px; --radius-md:12px;
+  --maxw:1120px; --section:clamp(56px,7vw,110px);
+  --font-h:"Playfair Display",serif; --font-b:"Lato",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+}
+
+/* base */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; color:var(--ink); font-family:var(--font-b); line-height:1.65; overflow-x:hidden;
+  background:
+    radial-gradient(1000px 600px at 10% -10%, rgba(122,178,211,.12), transparent 60%),
+    linear-gradient(180deg, var(--mint), #fff);
+  background-attachment: fixed;
+  position:relative;
+}
+a{color:inherit;text-decoration:none}
+.container{width:min(100% - 40px, var(--maxw)); margin-inline:auto}
+img{max-width:100%; display:block}
+
+/* fixed bg grid + network canvas */
+.bg-grid{
+  position:fixed; inset:0; z-index:-3; pointer-events:none;
+  background-image:url('data:image/svg+xml;utf8,\
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">\
+      <path d="M0 32H64M32 0V64" stroke="rgba(31,42,68,0.06)" stroke-width="1"/>\
+    </svg>');
+  background-size:64px 64px; opacity:.7;
+}
+#bg-net{
+  position:fixed; inset:0; z-index:-2; pointer-events:none; width:100%; height:100vh; opacity:.9;
+}
+
+/* nav */
+.nav-wrap{position:sticky; top:10px; z-index:900; padding:0 12px}
+.nav-bar{
+  margin:0 auto; width:min(100%,1040px);
+  display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:8px;
+  padding:10px; border-radius:999px; background:rgba(255,255,255,.75);
+  border:1px solid var(--line); box-shadow:var(--shadow); backdrop-filter:blur(8px);
+}
+.brand{
+  font-family:var(--font-h); font-weight:700; letter-spacing:.3px;
+  padding:10px 16px; border-radius:999px;
+  background:linear-gradient(90deg,var(--pale),var(--mint)); border:1px solid var(--line);
+}
+.nav-links{display:flex; gap:8px}
+.nav-links a{padding:10px 12px; border-radius:999px}
+.nav-links a:hover{background:var(--mint)}
+.nav-links .cta{background:var(--sky); color:#0b2239; font-weight:600; border:1px solid rgba(11,34,57,.15)}
+.nav-btn{
+  display:none; width:44px; height:44px; border:1px solid var(--line); border-radius:12px; background:#fff; box-shadow:var(--shadow);
+}
+.nav-btn span{display:block; width:20px; height:2px; background:#1f2a44; margin:5px auto; border-radius:2px}
+
+/* mobile popup menu (centered) */
+.nav-modal{
+  position:fixed; inset:0; z-index:1000; display:none;
+}
+.nav-modal.active{display:grid; place-items:center}
+.nav-backdrop{
+  position:absolute; inset:0; background:rgba(15,25,40,.35); backdrop-filter:blur(2px);
+}
+.nav-card{
+  position:relative; width:min(92vw,520px); background:#fff; border:1px solid var(--line);
+  border-radius:24px; box-shadow:0 30px 80px rgba(0,0,0,.18); padding:16px;
+  animation:pop .22s ease;
+}
+@keyframes pop{from{transform:scale(.96);opacity:.6} to{transform:none;opacity:1}}
+.nav-card .list{display:grid; gap:8px; margin:8px 0}
+.nav-card a{padding:14px 16px; border-radius:14px; border:1px solid var(--line); background:rgba(255,255,255,.9)}
+.nav-card a:hover{background:var(--mint)}
+.nav-close{position:absolute; right:10px; top:10px; width:40px; height:40px; border-radius:12px; border:1px solid var(--line); background:#fff}
+
+/* desktop hide/show */
+@media (max-width:900px){
+  .nav-links{display:none}
+  .nav-btn{display:grid; place-items:center}
+}
+
+/* hero */
+header.hero{min-height:86svh; display:grid; place-items:center; padding-top:80px}
+.hero-grid{display:grid; gap:clamp(24px,3vw,44px); grid-template-columns:1.05fr .95fr; align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.hero-text h1{font-family:var(--font-h); font-size:clamp(34px,6vw,60px); line-height:1.08; margin:0 0 8px}
+.sub{color:var(--muted); font-size:clamp(14px,1.6vw,16px)}
+.tagline{margin-top:10px; font-style:italic; border-left:3px solid var(--sky); padding-left:12px}
+.hero-actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
+.btn{padding:11px 16px; border-radius:999px; border:1px solid var(--line); background:#fff; box-shadow:var(--shadow); font-weight:600; transition:transform .2s ease}
+.btn:hover{transform:translateY(-2px)} .btn.primary{background:var(--sky)} .btn.light{background:var(--mint)} .btn.ghost{background:transparent}
+
+/* photo */
+.photo-wrap{
+  position:relative; justify-self:center;
+  width:min(420px,86vw); aspect-ratio:1/1;
+  border-radius:50%;
+  filter:drop-shadow(0 22px 52px rgba(31,42,68,.16));
+}
+.photo{
+  position:absolute; inset:0; border-radius:50%; overflow:hidden; border:6px solid rgba(255,255,255,.95);
+  background: radial-gradient(circle at 30% 30%, rgba(122,178,211,.18), transparent 42%);
+}
+.photo img{width:100%; height:100%; object-fit:cover; object-position:center}
+
+/* sections */
+section{padding:var(--section) 0}
+.section-head{display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:22px}
+.section-title{font-family:var(--font-h); font-size:clamp(26px,4vw,38px); margin:0}
+.section-title::after{content:""; display:block; height:2px; width:56px; margin-top:10px; background:linear-gradient(90deg,var(--sky),transparent)}
+.divider{height:1px; background:linear-gradient(90deg,transparent,var(--line),transparent); margin:12px 0 6px}
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius-xl); box-shadow:var(--shadow)}
+.lead{font-size:clamp(16px,1.8vw,18px); color:#2d3b57}
+
+/* about */
+.about-grid{display:grid; gap:clamp(16px,2.4vw,24px); grid-template-columns:1.15fr .85fr}
+@media (max-width:900px){.about-grid{grid-template-columns:1fr}}
+.bio{padding:18px}
+.bio ul{list-style:none; padding:0; margin:0; display:grid; gap:8px}
+.bio li{padding:10px 12px; border-radius:var(--radius-md); border:1px solid var(--line); background:#fff; display:grid; grid-template-columns:160px 1fr; gap:8px}
+.bio li strong{color:var(--muted); font-weight:700}
+
+/* timeline */
+.timeline{display:grid; gap:14px}
+.t-row{display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:start}
+.edu-logo{
+  width:72px; height:72px; border-radius:16px; /* diperbesar */
+  background:linear-gradient(135deg,var(--pale),var(--mint));
+  border:1px solid var(--line); box-shadow:var(--shadow); display:grid; place-items:center; overflow:hidden;
+}
+.edu-logo img{width:88%; height:88%; object-fit:contain}
+.t-card{background:#fff; border:1px solid var(--line); border-radius:var(--radius-lg); padding:12px 14px; box-shadow:var(--shadow)}
+.t-head{display:flex; justify-content:space-between; gap:10px; align-items:baseline}
+.t-head h4{margin:0; font-family:var(--font-h); font-size:19px}
+.t-year{color:var(--muted); font-weight:700}
+.t-body ul{margin:8px 0 0 18px} .t-body li{margin:4px 0}
+
+/* interests */
+.grid{display:grid; gap:clamp(12px,2vw,18px); grid-template-columns:repeat(3,1fr)}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.i-card{padding:16px; display:grid; gap:10px; transition:background .2s ease}
+.i-card:hover{background:#fff}
+.i-icon{width:40px;height:40px;border-radius:var(--radius-lg);display:grid;place-items:center;background:linear-gradient(135deg,var(--pale),var(--mint));border:1px solid var(--line)}
+
+/* contact */
+.contact-grid{display:grid; gap:clamp(16px,2.4vw,24px); grid-template-columns:.9fr 1.1fr}
+@media (max-width:900px){.contact-grid{grid-template-columns:1fr}}
+.socials{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.s-btn{display:inline-flex;gap:8px;align-items:center;padding:9px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);transition:transform .15s ease}
+.s-btn:hover{transform:translateY(-2px)}
+.s-btn svg{width:18px;height:18px}
+form{display:grid;gap:10px;padding:16px;background:#fff;border:1px solid var(--line);border-radius:var(--radius-xl);box-shadow:var(--shadow)}
+label{font-weight:600;color:#2d3b57;font-size:14px}
+input,textarea{width:100%;padding:11px 13px;border-radius:var(--radius-md);border:1px solid var(--line);background:#fff;font:inherit;color:var(--ink);transition:box-shadow .15s ease, border-color .15s ease}
+input:focus,textarea:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 3px rgba(122,178,211,.15)}
+textarea{resize:vertical;min-height:120px}
+.submit{justify-self:start;padding:11px 16px;border-radius:999px;border:1px solid var(--line);background:var(--sky);font-weight:700;cursor:pointer;box-shadow:var(--shadow)}
+.submit:hover{filter:brightness(1.05)}
+
+/* footer */
+footer{padding:22px 0 34px;border-top:1px solid var(--line);background:linear-gradient(180deg, rgba(185,229,232,.2), rgba(223,242,235,.32))}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.mini-icons{display:flex;gap:8px}
+.mini{width:36px;height:36px;border-radius:var(--radius-lg);display:grid;place-items:center;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);transition:transform .15s ease}
+.mini:hover{transform:translateY(-2px)}
+
+/* reveal */
+.reveal{opacity:0; transform:translate3d(0, 10px, 0); filter:blur(1px);
+  transition:opacity .6s ease, transform .6s ease, filter .5s ease; will-change:opacity,transform,filter}
+.reveal.is-visible{opacity:1; transform:none; filter:none}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce){
+  #bg-net{display:none}
+  .reveal{opacity:1; transform:none; filter:none}
+}
+</style>
+</head>
+<body>
+<canvas id="bg-net" aria-hidden="true"></canvas>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav class="nav-wrap" role="navigation" aria-label="Navigasi Utama">
+  <div class="nav-bar">
+    <a href="#home" class="brand">N A N</a>
+
+    <div class="nav-links">
+      <a href="#home">Beranda</a>
+      <a href="#about">Tentang</a>
+      <a href="#edu">Pendidikan</a>
+      <a href="#interests">Minat</a>
+      <a class="cta" href="#contact">Hubungi</a>
+    </div>
+
+    <button class="nav-btn" id="navOpen" aria-label="Buka menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE POPUP MENU -->
+<div class="nav-modal" id="navModal" aria-hidden="true">
+  <div class="nav-backdrop" id="navBackdrop"></div>
+  <div class="nav-card" role="dialog" aria-modal="true" aria-labelledby="navTitle">
+    <button class="nav-close" id="navClose" aria-label="Tutup">✕</button>
+    <h3 id="navTitle" style="margin:4px 8px 10px; font-family:var(--font-h);">Menu</h3>
+    <div class="list">
+      <a href="#home">Beranda</a>
+      <a href="#about">Tentang</a>
+      <a href="#edu">Pendidikan</a>
+      <a href="#interests">Minat</a>
+      <a href="#contact" style="background:var(--sky); color:#0b2239; font-weight:700;">Hubungi</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<header id="home" class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text reveal">
+      <h1>Naufal Akbar Nasution</h1>
+      <p class="sub">
+        Mahasiswa Semester 1, Prodi Ilmu Komputer, Jurusan Matematika, Fakultas Matematika dan Ilmu Pengetahuan Alam
+        <strong>Universitas Negeri Medan</strong>.
+      </p>
+      <p class="tagline">“Mahasiswa Ilmu Komputer yang sedang mengembangkan bakat di Universitas Negeri Medan.”</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#about">Lihat Selengkapnya</a>
+        <a class="btn light" href="#about">Tentang Saya</a>
+        <a class="btn ghost" href="#contact">Hubungi Saya</a>
+      </div>
+    </div>
+
+    <div class="photo-wrap reveal">
+      <figure class="photo">
+        <img src="img/foto-naufal.jpg" alt="Foto Naufal Akbar Nasution" loading="eager" decoding="async"
+             onerror="this.src='data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 300%22&gt;&lt;rect width=%22300%22 height=%22300%22 fill=%22%23DFF2EB%22/&gt;&lt;text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%231f2a44%22&gt;Foto tidak ditemukan&lt;/text&gt;&lt;/svg&gt;';">
+      </figure>
+    </div>
+  </div>
+  <div class="divider" aria-hidden="true"></div>
+</header>
+
+<!-- ABOUT -->
+<section id="about" class="container">
+  <div class="section-head"><h2 class="section-title reveal">Tentang Saya</h2></div>
+  <div class="divider" aria-hidden="true"></div>
+
+  <div class="about-grid">
+    <article class="card reveal" style="padding:18px;">
+      <p class="lead">
+        “Ilmu komputer adalah bidang ilmu yang mempelajari proses, metode, serta teknik dalam mengolah data menjadi informasi dengan memanfaatkan komputer. Cakupannya meliputi perancangan algoritma, pemrograman, sistem perangkat keras dan lunak, kecerdasan buatan, jaringan, hingga keamanan data. Secara umum, ilmu komputer berperan penting dalam menciptakan solusi teknologi yang efisien dan inovatif untuk berbagai kebutuhan di era digital.”
+      </p>
+    </article>
+
+    <aside class="card bio reveal" aria-label="Biodata Diri">
+      <ul>
+        <li><strong>Nama Lengkap</strong><span>Naufal Akbar Nasution</span></li>
+        <li><strong>Nama Panggilan</strong><span>Naufal, Nopal, Vel</span></li>
+        <li><strong>Tempat, Tanggal Lahir</strong><span>Medan, 16 Januari 2007</span></li>
+        <li><strong>Status</strong><span>Mahasiswa Aktif Semester 1 Universitas Negeri Medan</span></li>
+        <li><strong>Cita-Cita</strong><span>Programmer (Data Analyst)</span></li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<!-- PENDIDIKAN -->
+<section id="edu">
+  <div class="container">
+    <div class="section-head"><h2 class="section-title reveal">Pendidikan &amp; Pengalaman</h2></div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="timeline">
+      <div class="t-row reveal">
+        <div class="edu-logo"><img src="img/logo-unimed.png" alt="Logo UNIMED" loading="lazy"></div>
+        <div class="t-card">
+          <div class="t-head"><h4>Universitas Negeri Medan</h4><span class="t-year">2025 — Selesai</span></div>
+        </div>
+      </div>
+      <div class="t-row reveal">
+        <div class="edu-logo"><img src="img/logo-man2.png" alt="Logo MAN 2" loading="lazy"></div>
+        <div class="t-card">
+          <div class="t-head"><h4>Madrasah Aliyah Negeri 2 Model Medan</h4><span class="t-year">2022 — 2025</span></div>
+          <div class="t-body"><ul><li>Mathematic Club</li></ul></div>
+        </div>
+      </div>
+      <div class="t-row reveal">
+        <div class="edu-logo"><img src="img/logo-mts.png" alt="Logo MTs Miftahussalam" loading="lazy"></div>
+        <div class="t-card">
+          <div class="t-head"><h4>MTs Miftahussalam</h4><span class="t-year">2019 — 2022</span></div>
+          <div class="t-body"><ul><li>Sains Club</li><li>Robotic Club</li></ul></div>
+        </div>
+      </div>
+      <div class="t-row reveal">
+        <div class="edu-logo"><img src="img/logo-sds.png" alt="Logo SDS Rahmat Islamiyah" loading="lazy"></div>
+        <div class="t-card">
+          <div class="t-head"><h4>SDS Rahmat Islamiyah</h4><span class="t-year">2013 — 2019</span></div>
+          <div class="t-body"><ul><li>Pramuka</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MINAT -->
+<section id="interests" class="container">
+  <div class="section-head"><h2 class="section-title reveal">Minat Saya</h2></div>
+  <div class="divider" aria-hidden="true"></div>
+
+  <div class="grid">
+    <article class="i-card card reveal">
+      <div class="i-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="6" y="6" width="12" height="12" rx="3" stroke="currentColor" stroke-width="1.5"/><rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity=".25"/></svg>
+      </div>
+      <h3 style="margin:0;">Teknologi Informasi (IT)</h3>
+      <p class="muted" style="margin:0;">Algoritma, data, AI, dan pengembangan perangkat lunak.</p>
+    </article>
+    <article class="i-card card reveal">
+      <div class="i-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 5a3 3 0 0 1 3-3h11v17H7a3 3 0 0 0-3 3V5Z" stroke="currentColor" stroke-width="1.5"/><path d="M8 4h9" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <h3 style="margin:0;">Membaca Buku Fiksi</h3>
+      <p class="muted" style="margin:0;">Melatih empati dan kreativitas.</p>
+    </article>
+    <article class="i-card card reveal">
+      <div class="i-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M8 3h8v6h-3a2 2 0 1 0-4 0H8V3Zm8 18H8v-6h3a2 2 0 1 0 4 0h1v6ZM3 8h6v3a2 2 0 1 0 0 4v1H3V8Zm18 0v8h-6v-3a2 2 0 1 0 0-4V8h6Z" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <h3 style="margin:0;">Bermain Permainan Strategis</h3>
+      <p class="muted" style="margin:0;">Logika, perencanaan, dan keputusan.</p>
+    </article>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section id="contact">
+  <div class="container">
+    <div class="section-head"><h2 class="section-title reveal">Hubungi Saya</h2></div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="contact-grid">
+      <div class="card reveal" style="padding:16px;">
+        <h3 style="margin-top:0; display:flex; align-items:center; gap:8px;">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z" fill="currentColor"/></svg>
+          Email
+        </h3>
+        <p class="muted">nasthy.kyle174@gmail.com</p>
+
+        <h3>Media Sosial</h3>
+        <div class="socials" role="group" aria-label="Tautan Sosial">
+          <a class="s-btn" href="https://instagram.com/wanderelr" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm5 4a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6.5-.25a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z" fill="currentColor"/></svg>
+            Instagram
+          </a>
+          <a class="s-btn" href="https://wa.me/6281361511179" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24"><path d="M20 11.5A8.5 8.5 0 0 1 7.4 19.9L3 21l1.1-4.2A8.5 8.5 0 1 1 20 11.5Z" fill="currentColor"/><path d="M8.7 7.9c.2-.4.4-.4.7-.4h.6c.2 0 .4.2.4.5 0 .3-.1.6-.2.8a2 2 0 0 1-.3.5c-.1.2-.2.3 0 .6.3.4.6.9 1.1 1.3.6.5 1.2.8 1.9 1 .2 0 .4 0 .6-.2l.6-.6c.1-.2.3-.1.5 0l1.1.5c.1 0 .2.1.3.2 0 .2 0 .5-.2.8-.3.6-.9 1-1.5 1.1-1.1.1-2.5-.3-3.8-1.3-1.1-.8-2.1-2.2-2.4-3.4-.1-.5-.1-1 .1-1.5Z" fill="#fff"/></svg>
+            WhatsApp
+          </a>
+          <a class="s-btn" href="mailto:nasthy.kyle174@gmail.com" aria-label="Kirim Email">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z" fill="currentColor"/></svg>
+            Email
+          </a>
+        </div>
+      </div>
+
+      <form id="contactForm" class="card" autocomplete="on">
+        <h3 style="margin:0;">Formulir Kontak</h3>
+        <div><label for="nama">Nama</label><input id="nama" name="Nama" type="text" placeholder="Nama lengkap Anda" required></div>
+        <div><label for="email">Email</label><input id="email" name="Email" type="email" placeholder="example@gmail.com" required></div>
+        <div><label for="pesan">Pesan</label><textarea id="pesan" name="Pesan" placeholder="Tuliskan pesan Anda..." required></textarea></div>
+        <button class="submit" type="submit">Kirim Pesan</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container foot">
+    <div>© 2025 Naufal Akbar Nasution | Didesain dengan ChatGPT-5.</div>
+    <div class="mini-icons">
+      <a class="mini" href="mailto:nasthy.kyle174@gmail.com" aria-label="Email">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z" fill="currentColor"/></svg>
+      </a>
+      <a class="mini" href="https://instagram.com/wanderelr" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm5 4a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6.5-.25a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z" fill="currentColor"/></svg>
+      </a>
+      <a class="mini" href="https://wa.me/6281361511179" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M20 11.5A8.5 8.5 0 0 1 7.4 19.9L3 21l1.1-4.2A8.5 8.5 0 1 1 20 11.5Z" fill="currentColor"/><path d="M8.7 7.9c.2-.4.4-.4.7-.4h.6c.2 0 .4.2.4.5 0 .3-.1.6-.2.8a2 2 0 0 1-.3.5c-.1.2-.2.3 0 .6.3.4.6.9 1.1 1.3.6.5 1.2.8 1.9 1 .2 0 .4 0 .6-.2l.6-.6c.1-.2.3-.1.5 0l1.1.5c.1 0 .2.1.3.2 0 .2 0 .5-.2.8-.3.6-.9 1-1.5 1.1-1.1.1-2.5-.3-3.8-1.3-1.1-.8-2.1-2.2-2.4-3.4-.1-.5-.1-1 .1-1.5Z" fill="#fff"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ====== NAV POPUP CENTER ====== */
+const navOpen = document.getElementById('navOpen');
+const navModal = document.getElementById('navModal');
+const navClose = document.getElementById('navClose');
+const navBackdrop = document.getElementById('navBackdrop');
+function openNav(){navModal.classList.add('active'); navModal.setAttribute('aria-hidden','false');}
+function closeNav(){navModal.classList.remove('active'); navModal.setAttribute('aria-hidden','true');}
+navOpen?.addEventListener('click', openNav);
+navClose?.addEventListener('click', closeNav);
+navBackdrop?.addEventListener('click', closeNav);
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeNav(); });
+navModal.addEventListener('click', e=>{ if(e.target.closest('a')) closeNav(); });
+
+/* ====== FADE-IN ON SCROLL ====== */
+(function(){
+  const els=document.querySelectorAll('.reveal');
+  const io=new IntersectionObserver((entries,obs)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('is-visible'); obs.unobserve(e.target);} });
+  },{rootMargin:'-12% 0px -8% 0px', threshold:.08});
+  els.forEach(el=>io.observe(el));
+})();
+
+/* ====== BACKGROUND NETWORK (molekul seluruh halaman) ======
+   Ringan: partikel 60–120 tergantung area, garis koneksi pendek.
+   Menghormati prefers-reduced-motion. */
+(function(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canvas = document.getElementById('bg-net');
+  if(!canvas || reduce) return;
+  const ctx = canvas.getContext('2d');
+
+  let w=0,h=0,dpr=1, nodes=[], mouse={x:-9999,y:-9999}, frame=0;
+
+  function resize(){
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    w = canvas.clientWidth;
+    h = Math.max(canvas.clientHeight, window.innerHeight);
+    canvas.width = Math.floor(w*dpr); canvas.height = Math.floor(h*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    seed();
+  }
+  function seed(){
+    const count = Math.min(120, Math.max(60, Math.floor(w*h/24000)));
+    nodes = Array.from({length:count}, ()=>({
+      x: Math.random()*w,
+      y: Math.random()*h,
+      vx:(Math.random()-.5)*0.4,
+      vy:(Math.random()-.5)*0.4,
+      r: 1.2 + Math.random()*2.2,
+      a: 0.25 + Math.random()*0.25
+    }));
+  }
+
+  window.addEventListener('resize', resize);
+  window.addEventListener('mousemove', e=>{mouse.x=e.clientX;mouse.y=e.clientY;},{passive:true});
+  window.addEventListener('mouseleave', ()=>{mouse.x=-9999;mouse.y=-9999;});
+
+  function step(){
+    ctx.clearRect(0,0,w,h);
+
+    // backdrop soft tint
+    // ctx.fillStyle = 'rgba(223,242,235,.4)'; ctx.fillRect(0,0,w,h);
+
+    const linkDist = Math.min(160, Math.max(90, Math.sqrt(w*h)/18));
+
+    for(let i=0;i<nodes.length;i++){
+      const p = nodes[i];
+
+      // gentle move
+      p.x += p.vx; p.y += p.vy;
+      if(p.x<-20) p.x=w+20; else if(p.x>w+20) p.x=-20;
+      if(p.y<-20) p.y=h+20; else if(p.y>h+20) p.y=-20;
+
+      // mouse repel
+      const dx = p.x-mouse.x, dy=p.y-mouse.y, d2=dx*dx+dy*dy, rad=100;
+      if(d2<rad*rad){
+        const f=(rad-Math.sqrt(d2))/rad*0.6;
+        p.vx += (dx/d2)*20*f; p.vy += (dy/d2)*20*f;
+      }
+      p.vx*=0.995; p.vy*=0.995;
+
+      // draw node
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(122,178,211,${p.a})`; ctx.fill();
+
+      // links to next few
+      for(let j=i+1;j<i+6 && j<nodes.length;j++){
+        const q = nodes[j]; const ddx=p.x-q.x, ddy=p.y-q.y;
+        const d = Math.hypot(ddx,ddy);
+        if(d<linkDist){
+          ctx.strokeStyle = `rgba(185,229,232,${(1 - d/linkDist)*0.45})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
+        }
+      }
+    }
+
+    frame++; requestAnimationFrame(step);
+  }
+
+  resize(); step();
+})();
+</script>
+</body>
+</html>
